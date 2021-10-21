@@ -15,4 +15,11 @@ class User < ApplicationRecord
     -> { distinct },
     through: :visits,
     source: :visited_url
+
+  def visit!(shortened_url)
+    Visit.create!(
+      user_id: self.id,
+      url_id: shortened_url.id,
+    )
+  end
 end
